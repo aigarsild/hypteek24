@@ -1,4 +1,4 @@
-.PHONY: help setup install db wp-install theme-dev theme-build valet-start valet-stop valet-restart clean deploy-prod
+.PHONY: help setup install db wp-install theme-dev theme-build favicons valet-start valet-stop valet-restart clean deploy-prod
 
 # Deployment defaults
 HOST ?= virt136289@hypoteek24.ee
@@ -29,12 +29,13 @@ help:
 	@echo ""
 	@echo "Utilities:"
 	@echo "  make clean          - Clean theme node_modules and build"
+	@echo "  make favicons       - Generate favicon PNGs from assets/images/icons/favi.svg"
 	@echo "  make help           - Display this help message"
 	@echo ""
 	@echo "Deployment:"
 	@echo "  make deploy-prod REMOTE_DIR=/abs/path [HOST=$(HOST)] [BRANCH=$(BRANCH)]"
 	@echo ""
-    @echo ""
+	@echo ""
 
 # Complete setup
 setup: valet-link
@@ -66,6 +67,21 @@ theme-dev:
 # Theme production build
 theme-build:
 	cd web/app/themes/hypoteek-theme && npm run build
+
+# Favicon generation (requires macOS 'sips')
+FAVI_SRC=web/app/themes/hypoteek-theme/assets/images/icons/favi.svg
+FAVICON_DIR=web/app/themes/hypoteek-theme/assets/favicons
+
+favicons:
+	mkdir -p $(FAVICON_DIR)
+	cp $(FAVI_SRC) $(FAVICON_DIR)/favicon.svg
+	cp $(FAVI_SRC) $(FAVICON_DIR)/safari-pinned-tab.svg
+	sips -s format png $(FAVI_SRC) -z 180 180 --out $(FAVICON_DIR)/apple-touch-icon.png
+	sips -s format png $(FAVI_SRC) -z 32 32 --out $(FAVICON_DIR)/favicon-32x32.png
+	sips -s format png $(FAVI_SRC) -z 16 16 --out $(FAVICON_DIR)/favicon-16x16.png
+	sips -s format png $(FAVI_SRC) -z 192 192 --out $(FAVICON_DIR)/android-chrome-192x192.png
+	sips -s format png $(FAVI_SRC) -z 512 512 --out $(FAVICON_DIR)/android-chrome-512x512.png
+	@echo "Favicons generated in $(FAVICON_DIR)"
 
 # Database operations
 db-create:
@@ -127,5 +143,5 @@ status:
 
 # Deploy to production via SSH: pull-only
 deploy-prod:
-    @if [ -z "$(REMOTE_DIR)" ]; then echo "REMOTE_DIR is required, e.g. /data03/virt136289/domeenid/www.hypoteek24.ee/htdocs"; exit 1; fi
-    bash scripts/deploy.sh "$(HOST)" "$(REMOTE_DIR)" "$(BRANCH)"
+	@if [ -z "$(REMOTE_DIR)" ]; then echo "REMOTE_DIR is required, e.g. /data03/virt136289/domeenid/www.hypoteek24.ee/htdocs"; exit 1; fi
+	bash scripts/deploy.sh "$(HOST)" "$(REMOTE_DIR)" "$(BRANCH)"

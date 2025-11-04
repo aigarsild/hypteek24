@@ -11,6 +11,14 @@
 <head>
     <meta charset="<?php bloginfo( 'charset' ); ?>">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#ffffff">
+    <meta name="msapplication-TileColor" content="#ffffff">
+    <link rel="icon" href="<?php echo esc_url( HYPOTEEK_THEME_URI . '/assets/images/icons/favi.svg' ); ?>" type="image/svg+xml">
+    <link rel="icon" type="image/png" sizes="32x32" href="<?php echo esc_url( HYPOTEEK_THEME_URI . '/assets/favicons/favicon-32x32.png' ); ?>">
+    <link rel="icon" type="image/png" sizes="16x16" href="<?php echo esc_url( HYPOTEEK_THEME_URI . '/assets/favicons/favicon-16x16.png' ); ?>">
+    <link rel="apple-touch-icon" sizes="180x180" href="<?php echo esc_url( HYPOTEEK_THEME_URI . '/assets/favicons/apple-touch-icon.png' ); ?>">
+    <link rel="manifest" href="<?php echo esc_url( HYPOTEEK_THEME_URI . '/assets/favicons/site.webmanifest' ); ?>">
+    <link rel="mask-icon" href="<?php echo esc_url( HYPOTEEK_THEME_URI . '/assets/images/icons/favi.svg' ); ?>" color="#0a0a0a">
     <?php wp_head(); ?>
 </head>
 <body <?php body_class(); ?>>
