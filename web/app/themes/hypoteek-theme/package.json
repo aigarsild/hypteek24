@@ -1,0 +1,17 @@
+{
+  "name": "hypoteek-theme",
+  "version": "1.0.0",
+  "description": "A modern WordPress theme built with Tailwind CSS",
+  "scripts": {
+    "dev": "tailwindcss -i ./assets/css/input.css -o ./style.css --watch",
+    "build": "tailwindcss -i ./assets/css/input.css -o ./style.css --minify"
+  },
+  "keywords": [
+    "wordpress",
+    "theme",
+    "tailwind"
+  ],
+  "devDependencies": {
+    "tailwindcss": "^3.3.0"
+  }
+}

@@ -1,0 +1,255 @@
+================================================================================
+    HYPOTEEK WORDPRESS PROJECT - QUICK REFERENCE
+================================================================================
+
+PROJECT LOCATION: /Users/aigarsild/hypteek24
+
+INSTALLED COMPONENTS:
+✅ Bedrock 1.28.3          Modern WordPress boilerplate
+✅ WordPress 6.8.3         Latest WordPress core
+✅ Valet                   Local development server
+✅ wp-cli                  WordPress command line
+✅ Tailwind CSS 3.3.0      Utility-first CSS framework
+✅ hypoteek-theme          Custom starter theme
+
+================================================================================
+QUICK START COMMANDS
+================================================================================
+
+1. CREATE DATABASE (required first)
+   $ mysql -u root -p
+   mysql> CREATE DATABASE hypoteek;
+   mysql> CREATE USER 'hypoteek'@'localhost' IDENTIFIED BY 'password';
+   mysql> GRANT ALL PRIVILEGES ON hypoteek.* TO 'hypoteek'@'localhost';
+   mysql> FLUSH PRIVILEGES;
+
+2. UPDATE .env
+   Edit: /Users/aigarsild/hypteek24/.env
+   - Add DB_NAME, DB_USER, DB_PASSWORD
+   - Add security keys from https://roots.io/salts.html
+
+3. LINK WITH VALET
+   $ cd /Users/aigarsild/hypteek24
+   $ sudo valet link hypoteek
+   Access: http://hypoteek.test
+
+4. INSTALL WORDPRESS
+   $ wp core install \
+     --url=http://hypoteek.test \
+     --title="Hypoteek" \
+     --admin_user=admin \
+     --admin_password=password \
+     --admin_email=admin@hypoteek.test
+
+5. ACTIVATE THEME
+   $ wp theme activate hypoteek-theme
+
+6. START DEVELOPING
+   $ cd web/app/themes/hypoteek-theme
+   $ npm run dev
+
+================================================================================
+THEME STRUCTURE
+================================================================================
+
+web/app/themes/hypoteek-theme/
+├── header.php                 ← Site header markup
+├── footer.php                 ← Site footer markup
+├── index.php                  ← Main template
+├── functions.php              ← Theme setup & hooks
+├── style.css                  ← Generated Tailwind CSS
+│
+├── assets/
+│   ├── css/input.css         ← Tailwind directives
+│   ├── js/main.js            ← JavaScript
+│   └── images/               ← Images folder
+│
+├── partials/                  ← Reusable components
+│   ├── header-top.php
+│   ├── navigation.php
+│   ├── hero.php
+│   ├── sidebar.php
+│   └── footer-widgets.php
+│
+├── template-parts/            ← Post type templates
+│   ├── content.php
+│   └── content-none.php
+│
+├── inc/
+│   └── theme-helpers.php      ← Helper functions
+│
+├── package.json
+└── tailwind.config.js
+
+================================================================================
+USEFUL COMMANDS
+================================================================================
+
+THEME DEVELOPMENT:
+  $ npm run dev          ← Watch & rebuild CSS
+  $ npm run build        ← Production build (minified)
+
+WORDPRESS:
+  $ wp post create --post_title="Title" --post_type=post
+  $ wp theme list
+  $ wp plugin install plugin-name --activate
+  $ wp db export backup.sql
+  $ wp db import backup.sql
+
+VALET:
+  $ valet start          ← Start Valet
+  $ valet stop           ← Stop Valet
+  $ valet restart        ← Restart Valet
+  $ valet links          ← List linked sites
+  $ valet log            ← View logs
+
+MAKEFILE (from project root):
+  $ make help            ← Show all commands
+  $ make install         ← Install WordPress
+  $ make theme-dev       ← Watch theme CSS
+  $ make theme-build     ← Build theme CSS
+
+================================================================================
+LOADING PARTIALS IN TEMPLATES
+================================================================================
+
+Basic usage:
+  <?php get_partial( 'hero' ); ?>
+
+With arguments:
+  <?php get_partial( 'hero', array(
+    'title'    => 'Welcome',
+    'subtitle' => 'To our site',
+  ) ); ?>
+
+Then in partials/hero.php:
+  <h1><?php echo esc_html( $title ); ?></h1>
+
+================================================================================
+TAILWIND CSS WORKFLOW
+================================================================================
+
+Development (watch mode):
+  $ cd web/app/themes/hypoteek-theme
+  $ npm run dev
+  → CSS rebuilds automatically as you edit files
+
+Production (minified):
+  $ npm run build
+  → Creates optimized style.css
+
+Add custom components in assets/css/input.css:
+  @layer components {
+    .card {
+      @apply bg-white rounded-lg shadow-md p-6;
+    }
+  }
+
+================================================================================
+DOCUMENTATION FILES
+================================================================================
+
+README.md                              ← Full project documentation
+SETUP_GUIDE.md                         ← Quick setup instructions
+PROJECT_SUMMARY.md                     ← Project overview
+QUICK_REFERENCE.txt                    ← This file
+INSTALLATION_REPORT.md                 ← Installation details
+web/app/themes/hypoteek-theme/README.md ← Theme documentation
+
+================================================================================
+KEY CONFIGURATION FILES
+================================================================================
+
+.env                          ← Environment variables (create/update)
+tailwind.config.js           ← Tailwind configuration
+package.json                 ← npm dependencies
+functions.php                ← Theme setup & hooks
+composer.json                ← PHP dependencies
+
+================================================================================
+IMPORTANT NOTES
+================================================================================
+
+• Database: Create manually via MySQL first
+• Environment: Update .env with real credentials
+• Security: Generate keys at https://roots.io/salts.html
+• Valet: May require sudo password
+• CSS: Run npm dev while editing styles
+• Theme: Located at web/app/themes/hypoteek-theme/
+
+================================================================================
+TROUBLESHOOTING
+================================================================================
+
+CSS not updating?
+  → Make sure running: npm run dev
+  → Clear browser cache: Cmd+Shift+R
+  → Check for build errors in terminal
+
+Can't access hypoteek.test?
+  → Start Valet: valet start
+  → Check if linked: valet links
+  → Restart: valet restart
+
+Database connection error?
+  → Verify .env credentials
+  → Check MySQL is running
+  → Test: wp db check
+
+WordPress won't install?
+  → Check web folder permissions: chmod -R 755 web/
+  → Verify database exists
+  → Check .env configuration
+
+================================================================================
+DEVELOPMENT CHECKLIST
+================================================================================
+
+□ Create database
+□ Update .env credentials
+□ Generate & add security keys
+□ Run: sudo valet link hypoteek
+□ Run: wp core install
+□ Run: wp theme activate hypoteek-theme
+□ Start: npm run dev (in theme folder)
+□ Create first post
+□ Begin customizing theme
+
+================================================================================
+PROJECT INFORMATION
+================================================================================
+
+Project Name:        Hypoteek
+Location:           /Users/aigarsild/hypteek24
+Theme Name:         hypoteek-theme
+Theme Version:      1.0.0
+WordPress Version:  6.8.3
+Local Domain:       hypoteek.test
+PHP Required:       7.4+
+Created:            October 31, 2025
+
+================================================================================
+RESOURCES
+================================================================================
+
+Bedrock:     https://roots.io/bedrock/
+Valet:       https://laravel.com/docs/valet
+wp-cli:      https://wp-cli.org/
+WordPress:   https://wordpress.org/
+Tailwind:    https://tailwindcss.com/
+
+================================================================================
+NEXT STEPS
+================================================================================
+
+1. Read: SETUP_GUIDE.md (quick setup)
+2. Create: Your database
+3. Update: .env file
+4. Run: WordPress installation
+5. Start: Theme development
+6. Create: Your first post
+7. Customize: The theme!
+
+================================================================================
+                         READY TO DEVELOP! 🚀
+================================================================================
