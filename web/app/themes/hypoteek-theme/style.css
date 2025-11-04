@@ -1170,6 +1170,20 @@ div.hero-content-wrapper {
     width: 100%;
     height: 100%;
   }
+
+  /* Desktop alignment: left-align hero text and buttons */
+  .hero-title-main,
+  .hero-title-bold {
+    text-align: left;
+  }
+
+  .hero-subtitle {
+    text-align: left;
+  }
+
+  .hero-cta {
+    justify-content: flex-start;
+  }
 }
 
 /* Hero Subtitle */
@@ -2344,6 +2358,11 @@ div.hero-content-wrapper {
     width: 100%;
     max-width: 100%;
   }
+  
+  .cards-section-title {
+    font-size: 34px;
+    line-height: 1.2;
+  }
 
   /* Featured Section Mobile */
 
@@ -2363,6 +2382,7 @@ div.hero-content-wrapper {
   .featured-content {
     margin-left: 0;
     padding: 0;
+    text-align: center;
   }
 
   .featured-section-title {
@@ -2408,6 +2428,11 @@ div.hero-content-wrapper {
 
   .logo-area img {
     height: 24px;
+  }
+
+  /* Mobile fix: ensure hero image container has height */
+  .hero-image {
+    height: 40vh;
   }
 }
 
@@ -2515,5 +2540,53 @@ div.hero-content-wrapper {
   .md\:px-8 {
     padding-left: 2rem;
     padding-right: 2rem;
+  }
+}
+
+/* Hero overrides for tablet and desktop appended */
+@media (min-width: 768px) and (max-width: 1023px) {
+  /* Keep subtitle and buttons centered on tablet */
+  .hero-subtitle {
+    text-align: center;
+  }
+  .hero-cta {
+    justify-content: center;
+  }
+}
+
+@media (min-width: 1024px) {
+  /* Desktop hero height */
+  .hero-section {
+    min-height: 80vh;
+    height: 80vh;
+  }
+
+  /* Desktop title sizes */
+  .hero-title-main,
+  .hero-title-bold {
+    font-size: 50px;
+  }
+
+  /* Desktop subtitle alignment and size */
+  .hero-subtitle {
+    text-align: left;
+    font-size: 20px;
+  }
+
+  /* Desktop button alignment */
+  .hero-cta {
+    justify-content: flex-start;
+  }
+}
+
+/* Featured-section spacing and image size overrides (desktop only) */
+@media (min-width: 1024px) {
+  .featured-image-container {
+    left: 0;
+    width: 55%;
+  }
+
+  .featured-content {
+    margin-left: 5%;
   }
 }

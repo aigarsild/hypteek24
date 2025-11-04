@@ -22,25 +22,13 @@ $button_2_link = $hero_data['button_2_link'];
 ?>
 
 <!-- Hero Section -->
-<section id="hero" class="hero-section w-full relative flex items-center justify-center overflow-hidden" style="height: 90vh;">
+<section id="hero" class="hero-section w-full relative flex items-center justify-center overflow-hidden">
     <!-- Gradient Background -->
     <div class="hero-gradient absolute inset-0 z-0"></div>
     
     <!-- Hero Content Wrapper - Two Column Layout -->
     <div class="hero-content-wrapper relative z-10 w-full h-full flex flex-col items-center">
-        <?php if ( $image_url ) : ?>
-            <!-- Mobile Hero Image (full-bleed, outside container) -->
-            <div class="hero-image md:hidden flex items-center h-full relative overflow-hidden w-full">
-                <img 
-                    src="<?php echo esc_url( $image_url ); ?>" 
-                    alt="<?php echo esc_attr( $title_main ); ?>" 
-                    class="w-full h-full object-cover shadow-2xl hero-mask-image"
-                    <?php if ( ! empty( $svg_mask_url ) ) : ?>
-                        style="--hero-mask: url('<?php echo esc_attr( $svg_mask_url ); ?>');"
-                    <?php endif; ?>
-                >
-            </div>
-        <?php endif; ?>
+        
 
         <div class="container mx-auto px-4 sm:px-6 md:px-8 w-full">
             <div class="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 items-stretch h-full">
@@ -81,8 +69,8 @@ $button_2_link = $hero_data['button_2_link'];
 
                 <!-- Right Column - Hero Image -->
                 <?php if ( $image_url ) : ?>
-                    <!-- Desktop Hero Image (inside grid) -->
-                    <div class="hero-image hidden md:flex items-center h-full relative overflow-hidden">
+                    <!-- Unified Hero Image (inside grid for all breakpoints) -->
+                    <div class="hero-image flex items-center h-full relative overflow-hidden">
                         <img 
                             src="<?php echo esc_url( $image_url ); ?>" 
                             alt="<?php echo esc_attr( $title_main ); ?>" 

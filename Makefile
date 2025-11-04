@@ -1,4 +1,8 @@
-.PHONY: help setup install db wp-install theme-dev theme-build valet-start valet-stop valet-restart clean
+.PHONY: help setup install db wp-install theme-dev theme-build valet-start valet-stop valet-restart clean deploy-prod
+
+# Deployment defaults
+HOST ?= virt136289@hypoteek24.ee
+BRANCH ?= main
 
 # Display help text
 help:
@@ -26,6 +30,11 @@ help:
 	@echo "Utilities:"
 	@echo "  make clean          - Clean theme node_modules and build"
 	@echo "  make help           - Display this help message"
+	@echo ""
+	@echo "Deployment:"
+	@echo "  make deploy-prod REMOTE_DIR=/abs/path [HOST=$(HOST)] [BRANCH=$(BRANCH)]"
+	@echo ""
+    @echo ""
 
 # Complete setup
 setup: valet-link
@@ -115,3 +124,8 @@ status:
 	@echo ""
 	@echo "Active Theme:"
 	@wp theme list --field=name --status=active
+
+# Deploy to production via SSH: pull-only
+deploy-prod:
+    @if [ -z "$(REMOTE_DIR)" ]; then echo "REMOTE_DIR is required, e.g. /data03/virt136289/domeenid/www.hypoteek24.ee/htdocs"; exit 1; fi
+    bash scripts/deploy.sh "$(HOST)" "$(REMOTE_DIR)" "$(BRANCH)"

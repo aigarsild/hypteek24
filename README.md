@@ -302,6 +302,33 @@ npm run build
 5. Create a WordPress database and run installation
 6. Start developing! 🚀
 
+## Deployment (Production)
+
+Pull-only deploy via SSH.
+
+Prerequisites:
+
+- Your SSH public key is added to the server user.
+- You know the absolute project path on the server (REMOTE_DIR).
+- First time only: run `ssh virt136289@hypoteek24.ee` once to accept the host key.
+
+Deploy command:
+
+```bash
+make deploy-prod REMOTE_DIR='/data03/virt136289/domeenid/www.hypoteek24.ee/htdocs' [HOST=virt136289@hypoteek24.ee] [BRANCH=main]
+```
+
+What it does:
+
+- SSH to `HOST`
+- `cd` into `REMOTE_DIR`
+- `git fetch --prune && git checkout BRANCH && git pull --ff-only origin BRANCH`
+
+Notes:
+
+- Ensure `.env` on the server is configured for production.
+- `~` in `REMOTE_DIR` is expanded on the remote. Absolute paths are also supported.
+
 ---
 
 **Created**: October 2025

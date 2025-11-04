@@ -360,3 +360,5 @@ Created as a modern starter theme for WordPress development.
 **License**: GPL-2.0+  
 **Theme URI**: https://hypoteek.test
 
+
+make deploy-prod REMOTE_DIR='/data03/virt136289/domeenid/www.hypoteek24.ee/htdocs' HOST=virt136289@hypoteek24.ee BRANCH=main

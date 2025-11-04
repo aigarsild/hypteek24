@@ -432,6 +432,38 @@
       width: 100%;
       height: 100%;
     }
+
+    /* Desktop alignment: left-align hero text and buttons */
+    .hero-title-main,
+    .hero-title-bold {
+      text-align: left;
+    }
+  }
+
+  /* Desktop-only overrides */
+  @media (min-width: 1024px) {
+    /* Hero height on desktop */
+    .hero-section {
+      min-height: 80vh;
+      height: 80vh;
+    }
+
+    /* Title sizes on desktop */
+    .hero-title-main,
+    .hero-title-bold {
+      font-size: 50px;
+    }
+
+    /* Subtitle alignment and size only on desktop */
+    .hero-subtitle {
+      text-align: left;
+      font-size: 20px; /* ~text-xl */
+    }
+
+    /* Button group align left only on desktop */
+    .hero-cta {
+      justify-content: flex-start;
+    }
   }
 
   /* Hero Subtitle */
@@ -787,6 +819,18 @@
   z-index: 10;
 }
 
+/* Desktop-only featured layout to keep mobile unchanged */
+@media (min-width: 1024px) {
+  .featured-image-container {
+    left: 0;
+    width: 55%;
+  }
+
+  .featured-content {
+    margin-left: 55%;
+  }
+}
+
 .featured-section-title {
   font-size: 50px;
   font-weight: 800;
@@ -1011,6 +1055,7 @@
     display: flex;
     grid-row: 1;
     position: relative;
+    height: 40vh; /* Ensure container height for absolute img */
   }
   
   .hero-content {
@@ -1123,6 +1168,12 @@
     max-width: 100%;
   }
   
+  /* Cards Section title Mobile */
+  .cards-section-title {
+    font-size: 34px;
+    line-height: 1.2;
+  }
+  
   /* Featured Section Mobile */
   .featured-section {
     padding: 30px 0;
@@ -1140,6 +1191,7 @@
   .featured-content {
     margin-left: 0;
     padding: 0;
+    text-align: center;
   }
   
   .featured-section-title {
